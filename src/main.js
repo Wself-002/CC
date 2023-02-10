@@ -16,7 +16,7 @@ window.onload = function(){
     try{
       MobLink({
         // el: '#share',
-        // path: isiOS()?'':'com.example.tree_hole_bar.MainActivity',
+        path: '/cps/sharingtransfer.html',
         default: true,
         loadDataType:'1',//配置是否加loading，配置代表加入loading，不配置则没有loading动画
         params: {
