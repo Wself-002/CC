@@ -1,12 +1,14 @@
 var path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: path.join(__dirname, './src/main.js'),//打包入口文件路径
   output: {
     path: path.resolve(__dirname, './dist'), // 输出文件路径
-    filename: 'bundle.js', // 输出文件
-    clean:true
+    clean:true, // 清除原来的打包文件
+    // filename: 'js/[name].js', // 输出形式为js文件夹下的 xx.js
+    filename: '[name].js', // 输出形式为 xx.js
   },
   optimization: {
     minimize: true,
@@ -41,6 +43,12 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\.css$/,
+        // loader: 'css-loader'
+        // use: ['style-loader', 'css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader','postcss-loader']
       }
     ]
   },
@@ -50,6 +58,11 @@ module.exports = {
       //HTML模板路径
       template: './src/index.html',
       filename: 'sharingtransfer.html',
+    }),
+    
+    new MiniCssExtractPlugin({
+      // filename: 'style/[name].css' // 输出形式为style文件夹下的 xxx.css
+      filename: '[name].css' // 输出形式为 xxx.css
     })
   ],
   devServer:{

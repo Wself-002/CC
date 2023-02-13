@@ -1,0 +1,17 @@
+#share{
+  span{
+    color:red;
+  }
+  p{
+    font-weight: bold;
+    color:green;
+    font-size: 28px;
+  }
+  .box{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background: red;
+    transform: scale(1.1);
+  }
+}

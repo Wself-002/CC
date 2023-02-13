@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import './style.css'
 import { config } from './config'
 const url = window.location.href
 let apiUrl = process.env.NODE_ENV == 'development'? "https://web.test.heiheilove.com/api/cps/outer/error/report":"https://web.heiheilove.com/api/cps/outer/error/report"

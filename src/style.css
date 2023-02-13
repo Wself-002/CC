@@ -1,0 +1,15 @@
+#share span {
+  color: red;
+}
+#share p {
+  font-weight: bold;
+  color: green;
+  font-size: 28px;
+}
+#share .box {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  background: red;
+  transform: scale(1.1);
+}/*# sourceMappingURL=style.css.map */
