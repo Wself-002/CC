@@ -34,7 +34,7 @@ export const config = [
     website_android:'http://tc.xiaomianju.cn',// andorid跳转
     website_ios:'http://shudong.xsky.online',// ios跳转
     title:'同城交友圈',
-    src:''
+    src:'//cgwh.t4m.cn/applink.js'
   },
   {
     id:55,
