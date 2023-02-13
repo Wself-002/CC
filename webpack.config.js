@@ -71,5 +71,6 @@ module.exports = {
     open:true,// 自动打开网页
     // host:'local-ip', // 指定以ip打开页面,不想指定则去掉此选项即可
     // hot:true
-  }
+  },
+  watch:true // 自动监听文件更改,有更改的话会自动打包 ---tips:需运行命令webpack --watch --progress --mode development 
 }
