@@ -15,7 +15,7 @@ window.onload = function(){
   setTimeout(() => {
     try{
       MobLink({
-        // el: '#share',
+        el: '#share',
         path: '/cps/sharingtransfer.html',
         default: true,
         loadDataType:'1',//配置是否加loading，配置代表加入loading，不配置则没有loading动画
@@ -24,8 +24,14 @@ window.onload = function(){
         }
       });
       setTimeout(() => {
-        sendHttpRequest('调用MobLink成功,传递参数为:'+ getUrlDataFN(url).invitecode)
-      }, 800);
+        sendHttpRequest('调用MobLink成功,传递参数为:'+ getUrlDataFN(url).invitecode);
+        $(function () {
+          $('#share').bind("click", function () {
+            console.log('3213')
+          })
+          $('#share').trigger("click");
+        })
+      },800);
     }catch (e){
       sendHttpRequest('调用MobLink出错信息:'+ e )
       setTimeout(() => {
