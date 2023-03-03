@@ -27,18 +27,16 @@
       <div class="row3">
         <div class="title"><h3>推广员</h3></div>
         <div class="list list_header">
+          <div>账号</div>
           <div>昵称</div>
-          <div>手机号</div>
-          <div>邀请码</div>
           <div>邀请用户数</div>
           <div>充值会员数</div>
           <div>总积分</div>
         </div>
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <div class="list list_content" v-for="item in list" :key="item.id">
-            <div>{{ item.nickname | ellipsis }}</div>
             <div>{{ item.username }}</div>
-            <div>{{ item.invitecode }}</div>
+            <div>{{ item.nickname | ellipsis }}</div>
             <div>{{ item.users }}</div>
             <div>{{ item.clubs }}</div>
             <div>{{ item.jifen }}</div>
@@ -94,7 +92,7 @@ export default {
       if (this.finished) return;
       // 第一页固定传值latest，第N页传上一页最后一条数据的created
       this.$api.listAdmin({'latest':this.latest,'limit':10}).then((res) => {
-        console.log('res: ', res);
+        // console.log('res: ', res);
         this.loading = false;
         if (res.length > 0) {
           this.latest = res[res.length - 1].id;
@@ -157,6 +155,7 @@ export default {
         padding: 2vw 5vw;
         font-size: 14px;
         margin-right: 5vw;
+        border-radius:5px;
       }
       span {
         padding: 2vw 5vw;

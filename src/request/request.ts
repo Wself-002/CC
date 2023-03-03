@@ -23,17 +23,17 @@ request.interceptors.request.use(
 // 添加响应拦截器
 request.interceptors.response.use(
   (response) => {
-    console.log('response: ', response);
+    // console.log('response: ', response);
     if(response.status == 200){
       if(response.data.code == '000000'){
-        // console.log("123")
+        // // console.log("123")
         return response.data.data;
       }else if(response.data.code == "800302"){
-        // console.log("456")
+        // // console.log("456")
         Toast.fail(response.data.msg);
         router.replace('/login')
       }else{
-        // console.log("789")
+        // // console.log("789")
         Toast.fail(response.data.msg);
       }
     }else{

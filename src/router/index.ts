@@ -12,22 +12,27 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/administrator1",
-    name: "Administrator",
+    name: "Administrator1",
     component: () => import("../views/administrators/index1.vue"),
   },
   {
     path: "/administrator2",
-    name: "Administrator",
+    name: "Administrator2",
     component: () => import("../views/administrators/index2.vue"),
   },
   {
+    path: "/administrator3",
+    name: "Administrator3",
+    component: () => import("../views/administrators/index3.vue"),
+  },
+  {
     path: "/promoter1",
-    name: "Promoter",
+    name: "Promoter1",
     component: () => import("../views/promoter/index1.vue"),
   },
   {
     path: "/promoter2",
-    name: "Promoter",
+    name: "Promoter2",
     component: () => import("../views/promoter/index2.vue"),
   },
 ];

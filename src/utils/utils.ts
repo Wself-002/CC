@@ -75,5 +75,26 @@ export default {
         store.commit('saveChannel',ele)
       }
     })
+  },
+  // 获取时间
+  countDown () {
+    const Y = new Date().getFullYear()
+    const M = new Date().getMonth() + 1
+    const D = new Date().getDate()
+    const h = new Date().getHours()
+    const m = new Date().getMinutes()
+    const s = new Date().getSeconds()
+
+    const date1 = this.addZero(Y);
+    const date2 = this.addZero(M);
+    const date3 = this.addZero(D);
+    const date4 = this.addZero(h);
+    const date5 = this.addZero(m);
+    const date6 = this.addZero(s);
+
+    return {Y:date1,M:date2,D:date3,h:date4,m:date5,s:date6}
+  },
+  addZero (i:any) {
+    return i < 10 ? "0" + i : i + "";
   }
 };

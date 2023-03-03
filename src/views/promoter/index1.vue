@@ -43,14 +43,18 @@
       <div class="row3">
         <div class="title"><h3>邀请记录</h3></div>
         <div class="list list_header">
+          <div>id</div>
           <div>昵称</div>
           <div>注册时间</div>
-          <div>积分</div>
+          <div>开通会员</div>
+          <div>总积分</div>
         </div>
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <div class="list list_content" v-for="item in list" :key="item.id">
+            <div>{{ item.id }}</div>
             <div>{{ item.nickname | ellipsis }}</div>
-            <div>{{ item.nickname }}</div>
+            <div>{{ item.regtime }}</div>
+            <div>{{ item.jifen > 0 ? '是' :'否'}}</div>
             <div>{{ item.jifen }}</div>
           </div>
         </van-list>
@@ -114,6 +118,7 @@ export default {
     this.sid = info.sid
     this.userInfo(info.id);
     this.statStaff();
+
   },
   methods: {
     exitFun(){
@@ -127,7 +132,7 @@ export default {
     },
     userInfo(bid) {
       this.$api.userInfo({'bid':bid}).then((res) => {
-        console.log('当前用户信息res: ', res);
+        // console.log('当前用户信息res: ', res);
         this.nickname = res.nickname;
         this.invitecode = res.invitecode;
         this.swipeList = res.posters
@@ -185,7 +190,7 @@ export default {
     },
     errorReport(data) {
       this.$api.errorReport(data).then(() => {
-        // console.log("异常上报", res);
+        // // console.log("异常上报", res);
       });
     },
 

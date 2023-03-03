@@ -1,6 +1,5 @@
 <template>
   <div class="page" :style="{background:getChannel.bg}">
-    <van-notice-bar color="#fff" background="transparent" left-icon="info-o" scrollable :text="'尊敬的' + nickname + '您已登录'" />
     <van-tabs v-model="active" swipeable>
       <van-tab title="个人信息">
         <div class="row1">
@@ -29,38 +28,28 @@
       </van-tab>
       <van-tab title="数据">
         <div class="row3">
-        <div class="list list_header">
-          <div>账号</div>
-          <div>昵称</div>
-          <div>邀请用户数</div>
-          <div>充值会员数</div>
-          <div>总积分</div>
-        </div>
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <div class="list list_content" v-for="item in list" :key="item.id">
-            <div>{{ item.username }}</div>
-            <div>{{ item.nickname | ellipsis }}</div>
-            <div>{{ item.users }}</div>
-            <div>{{ item.clubs }}</div>
-            <div>{{ item.jifen }}</div>
+          <!-- <div class="title"><h3>推广员</h3></div> -->
+          <div class="list list_header">
+            <div>昵称</div>
+            <div>手机号</div>
+            <div>邀请码</div>
+            <div>邀请用户数</div>
+            <div>充值会员数</div>
+            <div>总积分</div>
           </div>
-        </van-list>
-      </div>
+          <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+            <div class="list list_content" v-for="item in list" :key="item.id">
+              <div>{{ item.nickname | ellipsis }}</div>
+              <div>{{ item.username }}</div>
+              <div>{{ item.invitecode }}</div>
+              <div>{{ item.users }}</div>
+              <div>{{ item.clubs }}</div>
+              <div>{{ item.jifen }}</div>
+            </div>
+          </van-list>
+        </div>
       </van-tab>
     </van-tabs>
-    <div class="one_boxs">
-      <div class="onebox">{{ timeObj.Y }}</div>
-      <span class="spot">-</span>
-      <div class="onebox">{{ timeObj.M }}</div>
-      <span class="spot">-</span>
-      <div class="onebox">{{ timeObj.D }}</div>
-      <span class="spot">&nbsp;&nbsp;</span>
-      <div class="onebox">{{ timeObj.h }}</div>
-      <span class="spot">:</span>
-      <div class="onebox">{{ timeObj.m }}</div>
-      <span class="spot">:</span>
-      <div class="onebox">{{ timeObj.s }}</div>
-    </div>
   </div>
 </template>
 <script>
@@ -69,6 +58,7 @@ export default {
   computed: { ...mapGetters([ "getChannel"]) },
   data() {
     return {
+      showProup:true,
       sid: "",
       nickname: "",
       latest: "latest",
@@ -78,8 +68,6 @@ export default {
       isReadonly: true,
       active: 0,
       jifen:0,
-      timeObj: {},
-      timerObj:null,
     };
   },
   created() {
@@ -87,11 +75,6 @@ export default {
     this.sid = info.sid
     this.userInfo(info.id);
     this.statAdmin();
-
-    clearInterval(this.timerObj)
-    this.timerObj = setInterval(() => {
-      this.timeObj = this.$utils.countDown()
-    },1000)
   },
   methods: {
     statAdmin(){
@@ -237,32 +220,8 @@ export default {
     }
   }
   .van-list {
-    height: calc(100vh - 32vh);
+    height: calc(100vh - 20vh);
     overflow-y: auto;
   }
-}
-.one_boxs{
-  position: fixed;
-  bottom: 3vw;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  .onebox{
-    min-width: 6vw;
-    height: 6vw;
-    text-align: center;
-    font-size: 20px;
-  }
-  .spot{
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 5px;
-  }
-}
-.page /deep/ .van-list__finished-text{
-  color: #ffffff;
 }
 </style>

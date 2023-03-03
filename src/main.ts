@@ -8,12 +8,13 @@ import utils from "./utils/utils";
 import "babel-polyfill";
 import Es6Promise from "es6-promise";
 Es6Promise.polyfill();
-import { Tab, Tabs,Toast, Notify,Dialog, Loading, Button, Icon, Divider, TreeSelect, Field, List, Image as VanImage, Popup, Swipe, SwipeItem, PullRefresh } from "vant";
+import { NoticeBar, Tab, Tabs,Toast, Notify,Dialog, Loading, Button, Icon, Divider, TreeSelect, Field, List, Image as VanImage, Popup, Swipe, SwipeItem, PullRefresh } from "vant";
 Vue.use(Toast);
 Vue.use(Notify);
 Vue.use(Dialog);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(NoticeBar);
 // 将所有 loading Toast 设置为背景不可点击
 Toast.setDefaultOptions("loading", { duration: 0, forbidClick: true, message: "" });
 Vue.use(Loading);
@@ -32,13 +33,12 @@ Vue.use(PullRefresh);
 Vue.prototype.$api = api;
 Vue.prototype.$utils = utils;
 
-Vue.filter("ellipsis", (value: string) => {
-  if (!value) return "";
-  if (value.length > 5) {
-    return value.slice(0, 5) + "...";
-  }
-  return value;
+import filters from "./utils/filters";
+Object.keys(filters).forEach((key) => {
+  // @ts-ignore
+  Vue.filter(key, filters[key]);
 });
+
 
 Vue.config.productionTip = false;
 

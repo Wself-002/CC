@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" :style="{background:getChannel.bg}">
     <header>
       <h2 align="center">登录一下<br/>查看属于自己的数据~</h2>
     </header>
@@ -21,7 +21,6 @@
       <van-button block round @click.prevent="submit" :loading="submitLoading" loading-text="登录中..." :disabled="!account || !password">
         登录
       </van-button>
-      {{getChannel.channel}}
     </main>
   </div>
 </template>
@@ -31,8 +30,8 @@ export default {
   computed: { ...mapGetters([ "getChannel"]) },
   data() {
     return {
-      account: "",
-      password: "",
+      account: "test_cps_gly01",
+      password: "123456",
       aid: "",
       see: false,
       submitLoading: false,
@@ -42,31 +41,10 @@ export default {
   methods: {
     submit() {
       this.submitLoading = true;
-      this.$api.login(`username=${this.account}&password=${this.password}`).then((res) => {
-        if (res.code == "000000") {
-          this.submitLoading = false;
-          localStorage.setItem("sid", res.data.sid);
-          // res.data.role//data.role	long	角色：2-管理员；3-推广员
-          // aid 49 甜芯 50 附近爱 51 花知 52 小面具
-          this.aid = res.data.aid;
-          if (res.data.role == 2) {
-            if (this.aid) {
-              this.$router.push({ path: "/administrator-backstage", query: { aid: this.aid } });
-            } else {
-              this.$router.push("/administrator-backstage");
-            }
-          } else {
-            if (this.aid) {
-              this.$router.push({ path: "/promoters-backstage", query: { aid: this.aid } });
-            } else {
-              this.$router.push("/promoters-backstage");
-            }
-          }
-        } else {
-          this.submitLoading = false;
-          this.$toast.fail(res.msg);
-        }
-      });
+      setTimeout(() => {
+        this.submitLoading = false;
+      },1500)
+      this.$emit('submit')
     },
     clickRightIcon() {
       this.see = !this.see;
@@ -81,14 +59,19 @@ export default {
   height: 100vh;
   padding: 0 10vw;
   color: #333333;
-  background: url("../../assets/images/bg1.png") no-repeat top center;
-  background-size: 100% auto;
   header {
     padding-top: 15vh;
   }
   main {
     padding-top: 5vh;
   }
+}
+.input_row /deep/ .van-field__control::-webkit-input-placeholder {
+	color:#6e6e70;
+  font-size: 12px;
+}
+.van-field__control:internal-autofill-selected{
+  background: transparent !important;
 }
 .input_row {
   display: flex;
@@ -98,6 +81,9 @@ export default {
   &:active {
     border-bottom-color: #ff943a;
   }
+}
+.van-cell{
+  background: transparent;
 }
 .van-button {
   color: #fff;

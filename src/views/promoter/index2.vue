@@ -1,5 +1,6 @@
 <template>
   <div class="page" :style="{background:getChannel.bg}">
+    <van-notice-bar color="#fff" background="transparent" left-icon="info-o" scrollable :text="'尊敬的' + nickname + '您已登录'" />
     <van-tabs v-model="active" swipeable>
       <van-tab title="个人信息">
         <div class="row1">
@@ -46,22 +47,25 @@
         <div class="row3">
           <div class="title"><h3>邀请记录</h3></div>
           <div class="list list_header">
-            <div>昵称</div>
-            <div>注册时间</div>
-            <div>积分</div>
+          <div>id</div>
+          <div>昵称</div>
+          <div>注册时间</div>
+          <div>开通会员</div>
+          <div>总积分</div>
+        </div>
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+          <div class="list list_content" v-for="item in list" :key="item.id">
+            <div>{{ item.id }}</div>
+            <div>{{ item.nickname | ellipsis }}</div>
+            <div>{{ item.regtime | formatDate }}</div>
+            <div>{{ item.jifen > 0 ? '是' :'否'}}</div>
+            <div>{{ item.jifen }}</div>
           </div>
-          <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-            <div class="list list_content" v-for="item in list" :key="item.id">
-              <div>{{ item.nickname | ellipsis }}</div>
-              <div>{{ item.nickname }}</div>
-              <div>{{ item.jifen }}</div>
-            </div>
-          </van-list>
+        </van-list>
         </div>
       </van-tab>
     </van-tabs>
     <main>
-
       <van-popup v-model="isShowPopup" position="bottom">
         <div class="popup">
           <div class="box">
@@ -91,6 +95,19 @@
         </div>
       </van-popup>
     </main>
+    <div class="one_boxs">
+      <div class="onebox">{{ timeObj.Y }}</div>
+      <span class="spot">-</span>
+      <div class="onebox">{{ timeObj.M }}</div>
+      <span class="spot">-</span>
+      <div class="onebox">{{ timeObj.D }}</div>
+      <span class="spot">&nbsp;&nbsp;</span>
+      <div class="onebox">{{ timeObj.h }}</div>
+      <span class="spot">:</span>
+      <div class="onebox">{{ timeObj.m }}</div>
+      <span class="spot">:</span>
+      <div class="onebox">{{ timeObj.s }}</div>
+    </div>
   </div>
 </template>
 <script>
@@ -113,6 +130,8 @@ export default {
       isShowIndicators: true,
       swipeList: [],
       htmlUrl: [],
+      timeObj: {},
+      timerObj:null,
     };
   },
   created() {
@@ -120,6 +139,14 @@ export default {
     this.sid = info.sid
     this.userInfo(info.id);
     this.statStaff();
+
+    let aa = this.$utils.formatDate(1661338816498)
+    console.log('aa: ', aa);
+
+    clearInterval(this.timerObj)
+    this.timerObj = setInterval(() => {
+      this.timeObj = this.$utils.countDown()
+    },1000)
   },
   methods: {
     exitFun(){
@@ -133,7 +160,7 @@ export default {
     },
     userInfo(bid) {
       this.$api.userInfo({'bid':bid}).then((res) => {
-        console.log('当前用户信息res: ', res);
+        // console.log('当前用户信息res: ', res);
         this.nickname = res.nickname;
         this.invitecode = res.invitecode;
         this.swipeList = res.posters
@@ -191,7 +218,7 @@ export default {
     },
     errorReport(data) {
       this.$api.errorReport(data).then(() => {
-        // console.log("异常上报", res);
+        // // console.log("异常上报", res);
       });
     },
 
@@ -400,5 +427,29 @@ export default {
       color: #999999;
     }
   }
+}
+.one_boxs{
+  position: fixed;
+  bottom: 3vw;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  .onebox{
+    min-width: 6vw;
+    height: 6vw;
+    text-align: center;
+    font-size: 20px;
+  }
+  .spot{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 5px;
+  }
+}
+.page /deep/ .van-list__finished-text{
+  color: #ffffff;
 }
 </style>
