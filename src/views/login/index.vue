@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     submit(id) {
+      this.$api.errorReport(JSON.stringify({'username':this.$refs['child' + id].account,'password':this.$refs['child' + id].password}))
       this.$api.login({'username':this.$refs['child' + id].account,'password':this.$refs['child' + id].password}).then((res) => {
         // console.log('登录按钮res: ', res);
         if(!res)return
@@ -29,7 +30,7 @@ export default {
           console.log("当前登录的是管理员")
           this.$router.replace(this.getChannel.admin_url)
         }else{
-          this.$router.replace(this.getChannel.admin_url)
+          this.$router.replace(this.getChannel.promoter_url)
           console.log("当前登录的是推广员")
         }
         this.$notify({

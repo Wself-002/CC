@@ -1,60 +1,67 @@
 <template>
-  <div class="page">
-    <main>
-      <div class="row1">
-        <div class="avatar">
-          <van-image fit="cover" round width="20vw" height="20vw" :src="require('../../assets/images/avatar.png')" />
+  <div class="page" :style="{background:getChannel.bg}">
+    <van-tabs v-model="active" swipeable>
+      <van-tab title="个人信息">
+        <div class="row1">
+          <div class="avatar">
+            <van-image fit="cover" round width="20vw" height="20vw" :src="require('../../assets/images/avatar.png')" />
+          </div>
+          <div class="row1_row">
+            <div>
+              <h5>
+                昵称：
+                <van-field
+                  v-model.trim="nickname"
+                  :readonly="isReadonly"
+                  :right-icon="isReadonly ? require('../../assets/images/edit-icon.png') : require('../../assets/images/right-icon.png')"
+                  placeholder="请输入昵称"
+                  @click-right-icon="clickRightIcon"
+                  maxlength="20"
+                />
+              </h5>
+            </div>
+            <div class="row1_row2">
+              <div>邀请码：{{ invitecode }}</div>
+              <span class="add_span" @click="openPopup" :style="{background:getChannel.bg,color:getChannel.color}">海报分享</span>
+              <span @click="exitFun" :style="{background:getChannel.bg,color:getChannel.color}">退出账号</span>
+            </div>
+          </div>
         </div>
-        <div class="row1_row">
+        <div class="row2">
           <div>
-            <h5>
-              昵称：
-              <van-field
-                v-model.trim="nickname"
-                :readonly="isReadonly"
-                :right-icon="isReadonly ? require('../../assets/images/edit-icon.png') : require('../../assets/images/right-icon.png')"
-                placeholder="请输入昵称"
-                @click-right-icon="clickRightIcon"
-                maxlength="20"
-              />
-            </h5>
+            <h3>{{ statObj.jifen }}</h3>
+            <p>总积分/点</p>
           </div>
-          <div class="row1_row2">
-            <div :style="{background:getChannel.bg,color:getChannel.color}">邀请码：{{ invitecode }}</div>
-            <span class="add_span" @click="openPopup">海报分享</span>
-            <span @click="exitFun" :style="{background:getChannel.bg,color:getChannel.color}">退出账号</span>
+          <div>
+            <h3>{{ statObj.all }}</h3>
+            <p>邀请人数/人</p>
+          </div>
+          <div>
+            <h3>{{ statObj.vip }}</h3>
+            <p>会员数/人</p>
           </div>
         </div>
-      </div>
-      <div class="row2">
-        <div>
-          <h3>{{ statObj.jifen }}</h3>
-          <p>总积分/点</p>
-        </div>
-        <div>
-          <h3>{{ statObj.all }}</h3>
-          <p>邀请人数/人</p>
-        </div>
-        <div>
-          <h3>{{ statObj.vip }}</h3>
-          <p>会员数/人</p>
-        </div>
-      </div>
-      <div class="row3">
-        <div class="title"><h3>邀请记录</h3></div>
-        <div class="list list_header">
-          <div>昵称</div>
-          <div>注册时间</div>
-          <div>积分</div>
-        </div>
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <div class="list list_content" v-for="item in list" :key="item.id">
-            <div>{{ item.nickname | ellipsis }}</div>
-            <div>{{ item.nickname }}</div>
-            <div>{{ item.jifen }}</div>
+      </van-tab>
+      <van-tab title="数据">
+        <div class="row3">
+          <div class="title"><h3>邀请记录</h3></div>
+          <div class="list list_header">
+            <div>昵称</div>
+            <div>注册时间</div>
+            <div>积分</div>
           </div>
-        </van-list>
-      </div>
+          <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+            <div class="list list_content" v-for="item in list" :key="item.id">
+              <div>{{ item.nickname | ellipsis }}</div>
+              <div>{{ item.nickname }}</div>
+              <div>{{ item.jifen }}</div>
+            </div>
+          </van-list>
+        </div>
+      </van-tab>
+    </van-tabs>
+    <main>
+
       <van-popup v-model="isShowPopup" position="bottom">
         <div class="popup">
           <div class="box">
@@ -87,14 +94,13 @@
   </div>
 </template>
 <script>
-// import VueQr from "vue-qr"; // 二维码组件
 import html2canvas from "html2canvas"; // 保存图片
 import { mapGetters } from "vuex";
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
-  // components: { VueQr },
   data() {
     return {
+      active:0,
       nickname: "",
       invitecode: "",
       statObj: { all: 0, vip: 0, jifen: 0 },
@@ -209,6 +215,7 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100vw;
+  height: 100vh;
   color: #333333;
   padding: 0 2.5vw;
   header {
@@ -217,6 +224,12 @@ export default {
     line-height: 5vh;
     text-align: center;
   }
+}
+.page /deep/ .van-tabs__nav{
+  background: transparent;
+}
+.page /deep/ .van-cell{
+  background: transparent;
 }
 .row1 {
   display: flex;
@@ -239,13 +252,12 @@ export default {
       div {
         padding: 1vw 2vw;
         font-size: 12px;
+        font-weight: bold;
       }
       span {
         padding: 1vw 2vw;
         border-radius: 5vw;
         font-size: 12px;
-        color: #ffffff;
-        background: #ff943a;
       }
       .add_span{
         margin: 0 2vw;
@@ -256,11 +268,11 @@ export default {
 .row2 {
   width: 100%;
   height: auto;
-  background: url("../../assets/images/bg2.png") no-repeat center center;
-  background-size: 100% 100%;
   color: #eeeeee;
   padding: 4vh 5vw;
   margin: 2.5vh 0;
+  background: #7aa8f8;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -294,9 +306,9 @@ export default {
     }
   }
   .list_header {
-    background: #fff4ea;
+    background: #262a2e;
     border-radius: 8px 8px 0px 0px;
-    color: #666666;
+    color: #ffffff;
   }
   .list_content {
     &:nth-child(odd) {
@@ -307,7 +319,7 @@ export default {
     }
   }
   .van-list {
-    height: calc(100vh - 50vh);
+    height: calc(100vh - 25vh);
     overflow-y: auto;
   }
 }

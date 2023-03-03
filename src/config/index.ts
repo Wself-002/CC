@@ -1,6 +1,6 @@
 export const realmName = [
-  // {channel:'way1',url:'http://localhost:8081',bg:'#ff943a',color:'#ffffff',admin_url:'/administrator',promoter_url:'/promoter'},
-  {channel:'way2',url:'http://localhost:8081',bg:'linear-gradient(220.55deg, #B7DCFF 0%, #FFA4F6 100%)',color:'#ffffff',admin_url:'/administrator',promoter_url:'/promoter'}
+  {channel:'way1',url:'http://localhost:8081',bg:'#ff943a',color:'#ffffff',admin_url:'/administrator1',promoter_url:'/promoter1'},
+  // {channel:'way2',url:'http://localhost:8081',bg:'linear-gradient(220.55deg, #7CF7FF 0%, #4B73FF 100%)',color:'#ffffff',admin_url:'/administrator2',promoter_url:'/promoter2'}
 ]
 
 export const appConfig = [

@@ -25,16 +25,17 @@ export default {
   errorReport: (data: any) => {
     return request.qspost(`${BASEAPI}/api/cps/outer/error/report`,data);
   },
-
-
-
-
-
-
   // 统计 - 管理员
-  statAdmin: (url: string) => {
-    return request.get(`${BASEAPI}/api/promote/stat/admin?${url}`);
+  statAdmin: (data: any) => {
+    return request.qspost(`${BASEAPI}/api/cps/outer/leader/total`,data);
   },
+
+
+
+
+
+
+
   // 用户信息 - 修改昵称
   userSaveNickname: (url: string) => {
     return request.get(`${BASEAPI}/api/promote/user/save/nickname?${url}`);

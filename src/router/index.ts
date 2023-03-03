@@ -11,15 +11,25 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/login/index.vue"),
   },
   {
-    path: "/promoter",
-    name: "Promoter",
-    component: () => import("../views/promoter/index.vue"),
+    path: "/administrator1",
+    name: "Administrator",
+    component: () => import("../views/administrators/index1.vue"),
   },
   {
-    path: "/administrator",
+    path: "/administrator2",
     name: "Administrator",
-    component: () => import("../views/administrators/index.vue"),
-  }
+    component: () => import("../views/administrators/index2.vue"),
+  },
+  {
+    path: "/promoter1",
+    name: "Promoter",
+    component: () => import("../views/promoter/index1.vue"),
+  },
+  {
+    path: "/promoter2",
+    name: "Promoter",
+    component: () => import("../views/promoter/index2.vue"),
+  },
 ];
 
 const router = new VueRouter({
