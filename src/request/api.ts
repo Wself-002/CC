@@ -35,20 +35,8 @@ export default {
   statAdmin: (url: string) => {
     return request.get(`${BASEAPI}/api/promote/stat/admin?${url}`);
   },
-  // 提现 - 申请
-  withdrawApply: (url: string) => {
-    return request.get(`${BASEAPI}/api/promote/withdraw/apply?${url}`);
-  },
-  // 提现 - 列表
-  withdrawList: (url: string) => {
-    return request.get(`${BASEAPI}/api/promote/withdraw/list?${url}`);
-  },
   // 用户信息 - 修改昵称
   userSaveNickname: (url: string) => {
     return request.get(`${BASEAPI}/api/promote/user/save/nickname?${url}`);
-  },
-  // 提现 - 导出
-  withdrawExcel: (url: string) => {
-    return request.get(`${BASEAPI}/api/promote/withdraw/excel?${url}`);
   },
 };

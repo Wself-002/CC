@@ -27,9 +27,9 @@ export default {
         localStorage.setItem("ccLogin", JSON.stringify(res));
         if(res.role == 2){
           console.log("当前登录的是管理员")
-          this.$router.replace('/administrator')
+          this.$router.replace(this.getChannel.admin_url)
         }else{
-          this.$router.replace('/promoter')
+          this.$router.replace(this.getChannel.admin_url)
           console.log("当前登录的是推广员")
         }
         this.$notify({

@@ -5,11 +5,11 @@
     </header>
     <main>
       <div class="input_row">
-        <van-image width="5vw" height="5vw" :src="require('../../assets/phone.png')" />
+        <van-image width="5vw" height="5vw" :src="require('../../assets/images/phone.png')" />
         <van-field v-model.trim="account" type="text" placeholder="请输入账号" clearable />
       </div>
       <div class="input_row">
-        <van-image width="5vw" height="5vw" :src="require('../../assets/message.png')" />
+        <van-image width="5vw" height="5vw" :src="require('../../assets/images/message.png')" />
         <van-field
           v-model.trim="password"
           :type="see ? 'text' : 'password'"
@@ -81,7 +81,7 @@ export default {
   height: 100vh;
   padding: 0 10vw;
   color: #333333;
-  background: url("../../assets/bg1.png") no-repeat top center;
+  background: url("../../assets/images/bg1.png") no-repeat top center;
   background-size: 100% auto;
   header {
     padding-top: 15vh;

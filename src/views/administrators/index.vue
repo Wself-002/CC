@@ -3,7 +3,7 @@
     <main>
       <div class="row1">
         <div class="avatar">
-          <van-image fit="cover" round width="20vw" height="20vw" :src="require('../../assets/avatar.png')" />
+          <van-image fit="cover" round width="20vw" height="20vw" :src="require('../../assets/images/avatar.png')" />
         </div>
         <div class="row1_row">
           <div>
@@ -12,7 +12,7 @@
               <van-field
                 v-model.trim="nickname"
                 :readonly="isReadonly"
-                :right-icon="isReadonly ? require('../../assets/edit-icon.png') : require('../../assets/right-icon.png')"
+                :right-icon="isReadonly ? require('../../assets/images/edit-icon.png') : require('../../assets/images/right-icon.png')"
                 placeholder="请输入昵称"
                 @click-right-icon="clickRightIcon"
                 maxlength="20" />
@@ -149,7 +149,6 @@ export default {
       div {
         padding: 2vw 5vw;
         font-size: 14px;
-        border-radius: 5vw;
         margin-right: 5vw;
       }
       span {

@@ -1,15 +1,17 @@
 <template>
   <div class="page" :style="{background:getChannel.bg}">
     <header>
-      <h2 align="center">您好<br/>欢迎登录</h2>
+      <div class="logo_img">
+        <img src="../../assets/images/lunchuan.svg" alt="">
+      </div>
     </header>
     <main>
       <div class="input_row">
-        <van-image width="5vw" height="5vw" :src="require('../../assets/phone.png')" />
+        <span class="iconfont">&#xe66c;</span>
         <van-field v-model.trim="account" type="text" placeholder="请输入账号" clearable />
       </div>
       <div class="input_row">
-        <van-image width="5vw" height="5vw" :src="require('../../assets/message.png')" />
+        <span class="iconfont">&#xe623;</span>
         <van-field
           v-model.trim="password"
           :type="see ? 'text' : 'password'"
@@ -30,7 +32,7 @@ export default {
   computed: { ...mapGetters([ "getChannel"]) },
   data() {
     return {
-      account: "",
+      account: "test_cps_gly01",
       password: "",
       see: false,
       submitLoading: false,
@@ -42,7 +44,7 @@ export default {
       this.submitLoading = true;
       setTimeout(() => {
         this.submitLoading = false;
-      },3000)
+      },1500)
       this.$emit('submit')
     },
     clickRightIcon() {
@@ -52,9 +54,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.logo_img{
+  width: 50vw;
+  margin: 0 auto;
+  img{
+    width: 100%;
+    object-fit: contain;
+  }
+}
 .input_row /deep/ .van-field__control::-webkit-input-placeholder {
-	color:#fff;
-  font-size: 14px;
+	color:#6e6e70;
+  font-size: 12px;
 }
 .van-field__control:internal-autofill-selected{
   background: transparent !important;
@@ -79,7 +89,14 @@ export default {
   border-bottom: 1px solid #eeeeee;
   margin-bottom: 3vh;
   &:active {
-    border-bottom-color: #ff943a;
+    border-bottom-color: #B7DCFF;
   }
+  /deep/ .van-field__control{
+    color: #ffffff;
+    font-weight: bold;
+  }
+}
+.iconfont{
+  color: #fafafb;
 }
 </style>
