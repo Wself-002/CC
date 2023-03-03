@@ -1,8 +1,10 @@
 .DS_Store
 node_modules
 /dist
-*.zip
-/prod
+/crt
+/dist_dev
+/dist_prod
+
 
 # local env files
 .env.local
@@ -22,3 +24,5 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+dist.zip
+crt.zip

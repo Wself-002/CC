@@ -1,7 +1,24 @@
-# 打包
-  npm run build:dev ------测试
-  npm run build:prod -----正式
+# cc-shej
 
+## Project setup
+```
+yarn install
+```
 
-# 运行
-  dist/sharingtransfer.html
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
+
+### Compiles and minifies for production
+```
+yarn build
+```
+
+### Lints and fixes files
+```
+yarn lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
