@@ -1,9 +1,8 @@
 export const realmName = [
-  // {channel:'way1',url:'http://localhost:8081',bg:'#ff943a',color:'#ffffff',admin_url:'/administrator1',promoter_url:'/promoter1'},
-  {channel:'way2',url:'http://localhost:8081',bg:'linear-gradient(220.55deg, #7CF7FF 0%, #4B73FF 100%)',color:'#ffffff',admin_url:'/administrator2',promoter_url:'/promoter2'},
-  // {channel:'way3',url:'http://localhost:8081',bg:'linear-gradient(220.55deg, #FF8570 0%, #418CB7 100%)',admin_url:'/administrator3',promoter_url:'/promoter3'},
-  // {channel:'way4',url:'http://localhost:8081',bg:'linear-gradient(220.55deg, #7CF7FF 0%, #4B73FF 100%)',color:'#ffffff',admin_url:'/administrator4',promoter_url:'/promoter4'},
-  // {channel:'way5',url:'http://localhost:8081',bg:'linear-gradient(220.55deg, #7CF7FF 0%, #4B73FF 100%)',color:'#ffffff',admin_url:'/administrator5',promoter_url:'/promoter5'},
+  // {channel:'way1',url:'http://localhost:8081',dialog_btn:'#ff943a',bg:'#ff943a',color:'#ffffff'},
+  // {channel:'way2',url:'http://localhost:8081',dialog_btn:'#7aa8f8',bg:'linear-gradient(220.55deg, #7CF7FF 0%, #4B73FF 100%)',color:'#ffffff'},
+  // {channel:'way3',url:'http://localhost:8081',dialog_btn:'#6495ED',bg:'#6495ED',color:'#ffffff'},
+  {channel:'way4',url:'http://localhost:8081',dialog_btn:'#6495ED',bg:'linear-gradient(220.55deg, #FFEB3A 0%, #4DEF8E 100%)',color:'#ffffff'},
 ]
 
 export const appConfig = [

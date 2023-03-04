@@ -8,19 +8,19 @@
     <main>
       <div class="input_row">
         <span class="iconfont">&#xe66c;</span>
-        <van-field v-model.trim="account" type="text" placeholder="请输入账号" clearable />
+        <van-field v-model.trim="objInfo.account" type="text" placeholder="请输入账号" clearable />
       </div>
       <div class="input_row">
         <span class="iconfont">&#xe623;</span>
         <van-field
-          v-model.trim="password"
-          :type="see ? 'text' : 'password'"
+          v-model.trim="objInfo.password"
+          :type="objInfo.see ? 'text' : 'password'"
           placeholder="请输入密码"
           clearable
-          :right-icon="see ? 'browsing-history' : 'browsing-history-o'"
+          :right-icon="objInfo.see ? 'browsing-history' : 'browsing-history-o'"
           @click-right-icon="clickRightIcon" />
       </div>
-      <van-button class="" color="rgb(183, 220, 255)" block round @click.prevent="submit" :loading="submitLoading" loading-text="登录中..." :disabled="!account || !password">
+      <van-button class="" color="rgb(183, 220, 255)" block round @click.prevent="submit" :loading="objInfo.submitLoading" loading-text="登录中..." :disabled="!objInfo.account || !objInfo.password">
         登录
       </van-button>
     </main>
@@ -30,25 +30,18 @@
 import { mapGetters } from "vuex";
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
-  data() {
-    return {
-      account: "test_cps_gly01",
-      password: "",
-      see: false,
-      submitLoading: false,
-    };
+  props: {
+    objInfo: {
+      type: Object,
+      default: function () { return {} }
+    }
   },
-
   methods: {
     submit() {
-      this.submitLoading = true;
-      setTimeout(() => {
-        this.submitLoading = false;
-      },1500)
-      this.$emit('submit')
+      this.$emit('childMethods','submit')
     },
     clickRightIcon() {
-      this.see = !this.see;
+      this.$emit('childMethods','clickRightIcon')
     },
   }
 };
