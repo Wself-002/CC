@@ -87,7 +87,7 @@ export default {
     },
     // 统计信息
     statStaff() {
-      this.$api.statStaff({self:''}).then((res) => {
+      this.$api.statStaff().then((res) => {
         this.objInfo.statObj.all = res.users;
         this.objInfo.statObj.vip = res.clubs;
         this.objInfo.statObj.jifen = res.jifen;

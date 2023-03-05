@@ -51,7 +51,7 @@ export default {
       });
     },
     statAdmin(){
-      this.$api.statAdmin({}).then((res) => {
+      this.$api.statAdmin().then((res) => {
         this.objInfo.jifen = res.all
       });
     },

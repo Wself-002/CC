@@ -8,11 +8,11 @@ const request = axios.create({
 request.interceptors.request.use(
   function (config) {
     if(config.url == (process.env.VUE_APP_BASEAPI + '/api/cps/outer/login/pswd')){
-      config.data = config.data + '&cid=2'
+      config.data = config.data ? config.data + '&cid=2' : 'cid=2'
       return config;
     }else{
       const info = JSON.parse(localStorage.getItem("ccLogin") as any)
-      config.data = config.data + `&cid=2&sid=${info.sid}`
+      config.data = config.data ? config.data + `&cid=2&sid=${info.sid}` : `cid=2&sid=${info.sid}`
       return config;
     }
   },
