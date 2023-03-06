@@ -122,6 +122,7 @@ export default {
       display: flex;
       align-items: center;
       div {
+        font-weight: bold;
         padding: 1vw 2vw;
         font-size: 12px;
       }

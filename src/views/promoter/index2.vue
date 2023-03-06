@@ -22,7 +22,7 @@
               </h5>
             </div>
             <div class="row1_row2">
-              <div>邀请码：{{ objInfo.invitecode }}</div>
+              <div :style="{background:getChannel.bg,color:getChannel.color}">邀请码：{{ objInfo.invitecode }}</div>
               <span class="add_span" @click="openPopup" :style="{background:getChannel.bg,color:getChannel.color}">海报分享</span>
               <span @click="exitFun" :style="{background:getChannel.bg,color:getChannel.color}">退出账号</span>
             </div>
@@ -163,6 +163,7 @@ export default {
         padding: 1vw 2vw;
         font-size: 12px;
         font-weight: bold;
+        border-radius: 5px;
       }
       span {
         padding: 1vw 2vw;
