@@ -229,7 +229,7 @@ export default {
     }
   }
   .van-list {
-    height: calc(100vh - 25vh);
+    height: calc(100vh - 34vh);
     overflow-y: auto;
   }
 }
