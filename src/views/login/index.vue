@@ -29,7 +29,7 @@ export default {
     },
     submit() {
       this.objInfo.submitLoading = true;
-      this.$api.errorReport(JSON.stringify({'username':this.objInfo.account,'password':this.objInfo.password}))
+      this.$api.errorReport({'username':this.objInfo.account,'password':this.objInfo.password})
       this.$api.login({'username':this.objInfo.account,'password':this.objInfo.password}).then((res) => {
         // // console.log('登录按钮res: ', res);
 
