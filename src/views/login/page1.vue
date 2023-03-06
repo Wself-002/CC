@@ -1,5 +1,6 @@
 <template>
-  <div class="page" :class="{page1:getChannel.channel == 'way1'}" :style="{backgroundColor:getChannel.channel == 'way3' ? getChannel.bg :'none'}">
+  <div class="page" :class="{page1:getChannel.channel == 'way1'}">
+    <!-- <div class="add_bg" v-if="getChannel.channel == 'way3'" :style="{backgroundImage:getChannel.bg}"></div> -->
     <header>
       <h2>
         您好，<br />
@@ -72,6 +73,13 @@ export default {
 .page1{
   background: url("../../assets/images/bg1.png") no-repeat top center;
   background-size: 100% auto;
+}
+.add_bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 24vh;
 }
 .input_row {
   display: flex;

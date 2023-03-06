@@ -32,7 +32,7 @@ export default {
       this.$api.errorReport(JSON.stringify({'username':this.objInfo.account,'password':this.objInfo.password}))
       this.$api.login({'username':this.objInfo.account,'password':this.objInfo.password}).then((res) => {
         // // console.log('登录按钮res: ', res);
-        
+
         this.objInfo.submitLoading = false;
         if(!res)return
         localStorage.setItem("ccLogin", JSON.stringify(res));
@@ -47,6 +47,7 @@ export default {
           message: `欢迎${res.nickname}登录`,
           color: this.getChannel.color,
           background: this.getChannel.bg,
+          duration:1500
         });
       })
     },

@@ -20,7 +20,7 @@
           :right-icon="objInfo.see ? 'browsing-history' : 'browsing-history-o'"
           @click-right-icon="clickRightIcon" />
       </div>
-      <van-button class="" color="rgb(183, 220, 255)" block round @click.prevent="submit" :loading="objInfo.submitLoading" loading-text="登录中..." :disabled="!objInfo.account || !objInfo.password">
+      <van-button class="" :color="getChannel.dialog_btn" block round @click.prevent="submit" :loading="objInfo.submitLoading" loading-text="登录中..." :disabled="!objInfo.account || !objInfo.password">
         登录
       </van-button>
     </main>

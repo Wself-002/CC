@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <div class="row2" :class="{row_1:getChannel.channel == 'way1'}" :style="{backgroundColor:getChannel.channel == 'way3' ? getChannel.bg :'none'}">
+      <div class="row2" :class="{row_1:getChannel.channel == 'way1'}" :style="{backgroundImage:getChannel.channel == 'way3' ? getChannel.bg :''}">
         <div>
           <h3>{{ objInfo.statObj.jifen }}</h3>
           <p>总积分/点</p>

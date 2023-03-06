@@ -1,6 +1,6 @@
 <template>
-  <div class="page" :style="{background:getChannel.bg}">
-    <van-notice-bar color="#fff" background="transparent" left-icon="info-o" scrollable :text="'尊敬的' + objInfo.nickname + '您已登录'" />
+  <div class="page">
+    <van-notice-bar :style="{background:getChannel.bg}" color="#fff" background="transparent" left-icon="info-o" scrollable :text="'尊敬的' + objInfo.nickname + '您已登录'" />
     <van-tabs v-model="active" swipeable>
       <van-tab title="个人信息">
         <div class="row1">
@@ -21,7 +21,7 @@
               </h5>
             </div>
             <div class="row1_row2">
-              <div>总积分:{{objInfo.jifen}}</div>
+              <div :style="{background:getChannel.bg,color:getChannel.color}">总积分:{{objInfo.jifen}}</div>
               <span @click="exitFun" :style="{background:getChannel.bg,color:getChannel.color}">退出账号</span>
             </div>
           </div>
@@ -48,7 +48,7 @@
       </div>
       </van-tab>
     </van-tabs>
-    <div class="one_boxs">
+    <div class="one_boxs" :style="{background:getChannel.bg}">
       <div class="onebox">{{ timeObj.Y }}</div>
       <span class="spot">-</span>
       <div class="onebox">{{ timeObj.M }}</div>
@@ -110,7 +110,6 @@ export default {
   width: 100vw;
   height: 100vh;
   color: #333333;
-  padding: 2vw 2.5vw 0;
 }
 .page /deep/ .van-tabs__nav{
   background: transparent;
@@ -122,6 +121,8 @@ export default {
   display: flex;
   align-items: center;
   margin-top: 5vw;
+  width: 100%;
+  padding: 0 2.5vw;
   .avatar {
     margin-right: 2vw;
   }
@@ -141,7 +142,6 @@ export default {
         padding: 2vw 5vw;
         font-size: 14px;
         margin-right: 5vw;
-        font-weight: bold;
         border-radius:5px;
       }
       span {
@@ -154,6 +154,8 @@ export default {
   }
 }
 .row3 {
+  width: 100%;
+  padding: 0 2.5vw;
   margin-top: 2vh;
   .title {
     font-size: 18px;
@@ -195,13 +197,14 @@ export default {
 }
 .one_boxs{
   position: fixed;
-  bottom: 3vw;
+  bottom: 0;
   left: 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
+  padding: 3vw 0;
   .onebox{
     min-width: 6vw;
     height: 6vw;
