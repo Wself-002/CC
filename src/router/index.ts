@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,9 @@ const router = new VueRouter({
 
 router.beforeEach((to: any, from: any, next: any) => {
   const loginInfo = JSON.parse(localStorage.getItem("ccLogin") || JSON.stringify({}))
+  setTimeout(() => {
+    document.title = (store.state.configInfo as any).title
+  },500)
   if(loginInfo){
     next();
   }else{
