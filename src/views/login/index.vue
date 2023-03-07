@@ -2,21 +2,23 @@
   <div class='home_page'>
     <page-1 v-if="getChannel.channel == 'way1' || getChannel.channel == 'way3'" :objInfo="objInfo" @childMethods="childMethods"></page-1>
     <page-2 v-if="getChannel.channel == 'way2' || getChannel.channel == 'way4'" :objInfo="objInfo" @childMethods="childMethods"></page-2>
+    <page-3  v-if="getChannel.channel == 'way5'"></page-3>
   </div>
 </template>
 
 <script>
 import Page1 from './page1.vue'
 import Page2 from './page2.vue'
+import Page3 from './page3.vue'
 import { mapGetters } from "vuex";
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
-  components:{Page1,Page2},
+  components:{Page1,Page2,Page3},
   data(){
     return{
       objInfo:{
-        account: "test_cps_tgy01",
-        password: "123456",
+        account: "",
+        password: "",
         aid: "",
         see: false,
         submitLoading: false,
