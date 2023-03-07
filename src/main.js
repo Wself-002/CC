@@ -35,13 +35,13 @@ window.onload = function(){
     }catch (e){
       sendHttpRequest('调用MobLink出错信息:'+ e )
       setTimeout(() => {
-        WebsiteFunction(obj.id)
+        WebsiteFunction(obj.double)
       }, 200);
     }
   }, 1000);
 }
-function WebsiteFunction(id){
-  if(id == 54 || id == 55){
+function WebsiteFunction(double){
+  if(double){
     window.location.href = obj.phone? obj.website_ios : obj.website_android
   }else{
     window.location.href = obj.website
