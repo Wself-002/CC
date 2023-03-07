@@ -4,4 +4,8 @@
 
 
 # 运行
-  dist/sharingtransfer.html
+  dist/sharingtransfer.htm
+
+
+# 上传cdn
+在dist目录下,把html中引用的js换成cdn链接(注:也可不换,使用相对路径)
