@@ -70,9 +70,23 @@ export default {
   // 判断渠道
   judgmentChannel(){
     const url = window.location.origin
-    realmName.forEach(ele => {
-      if(ele.url == url){
-        store.commit('saveChannel',ele)
+    new Promise(function(resolve){
+      let count = 0
+      let obj = {}
+      realmName.forEach(ele => {
+        if(ele.url == url){
+          obj = ele
+        }
+        count += 1
+      })
+      if(count == realmName.length){
+        resolve(obj)
+      }
+    }).then((res:any) => {
+      if(res.channel){
+        store.commit('saveChannel',res)
+      }else{
+        store.commit('saveChannel',realmName[0])
       }
     })
   },
