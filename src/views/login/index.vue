@@ -15,8 +15,8 @@ export default {
   data(){
     return{
       objInfo:{
-        account: "test_cps_tgy01",
-        password: "123456",
+        account: "",
+        password: "",
         aid: "",
         see: false,
         submitLoading: false,
