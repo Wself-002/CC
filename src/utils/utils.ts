@@ -86,7 +86,7 @@ export default {
       if(res.channel){
         store.commit('saveChannel',res)
       }else{
-        store.commit('saveChannel',realmName[0])
+        store.commit('saveChannel',realmName[realmName.length - 1])
       }
     })
   },

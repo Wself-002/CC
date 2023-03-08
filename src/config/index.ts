@@ -5,4 +5,7 @@ export const realmName = [
 
   {title:'大漠风淘沙',channel:'way2',url:'https://iuv.xsky.online',dialog_btn:'#7aa8f8',bg:'linear-gradient(220.55deg, #7CF7FF 0%, #4B73FF 100%)',color:'#ffffff'},
   {title:'玻璃空间',channel:'way4',url:'https://mmd.xsky.online',dialog_btn:'#97A2F3',bg:'linear-gradient(220.55deg, #DDE4FF 0%, #8DA2EE 100%)',color:'#ffffff'},
+
+  {title:'三国争雄',channel:'way5',url:'https://mmd.xsky.online',dialog_btn:'#97A2F3',bg:'linear-gradient(220.55deg, #DDE4FF 0%, #8DA2EE 100%)',color:'#ffffff'},
+
 ]

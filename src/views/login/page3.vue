@@ -27,6 +27,7 @@ export default {
   methods: {
 
     touchstart (ev) {
+      ev.preventDefault()
       // console.log('ev: ', ev);
       // 定时器控制长按时间，超过500毫秒开始进行拖拽
       this.timeoutevent = setTimeout(() => {
@@ -51,8 +52,10 @@ export default {
       };
       selectdom.style.left = `${offsetLeft}px`;
       selectdom.style.top = `${offsetTop}px`;
+        selectdom.style.backgroundColor = 'red'
     },
     touchmove (ev) {
+      ev.preventDefault()
       // console.log('ev: ', ev);
       // 未达到500毫秒就移动则不触发长按，清空定时器
 
@@ -70,9 +73,11 @@ export default {
         // console.log('pageX, pageY: ', pageX, pageY);
         selectdom.style.left = `${pageX - lefts}px`;
         selectdom.style.top = `${pageY - tops}px`;
+        selectdom.style.backgroundColor = 'red'
       }
     },
     touchend (ev) {
+      ev.preventDefault()
       // 清空定时器
       clearTimeout(this.timeoutevent);
       if (this.longclick === 1) {
@@ -86,6 +91,7 @@ export default {
         console.log('scrollWidth, scrollHeight: ', scrollWidth, scrollHeight);
 
 
+        selectdom.style.backgroundColor = '#fcebd0'
         selectdom.style.top = offsetTop + 'px'
         let isLeft = Math.sign((scrollWidth / 2) - offsetLeft) == -1 ? 'right' : 'left'
         if (isLeft == 'left') {
@@ -142,14 +148,13 @@ export default {
   color: #e0933a;
   background: #fcebd0;
   font-size: 14px;
-  height: 36px;
-  line-height: 36px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  // padding: 10px;
   &.rightbtn {
     border-radius: 20px 0 0 20px;
   }
