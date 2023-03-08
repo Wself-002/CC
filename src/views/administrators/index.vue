@@ -17,12 +17,9 @@ export default {
       objInfo:{
         sid: "",
         nickname: "",
-        latest: "latest",
-        list: [],
-        loading: false,
-        finished: false,
         isReadonly: true,
         jifen:0,
+        ishow_searchResult_num:1, // 1 没有搜索时不展示结果  2搜索完有数据  3 搜索完无数据
       }
     }
   },
@@ -53,21 +50,6 @@ export default {
     statAdmin(){
       this.$api.statAdmin().then((res) => {
         this.objInfo.jifen = res.all
-      });
-    },
-    onLoad() {
-      if (this.objInfo.finished) return;
-      // 第一页固定传值latest，第N页传上一页最后一条数据的created
-      this.$api.listAdmin({'latest':this.objInfo.latest,'limit':10}).then((res) => {
-        // console.log('res: ', res);
-        this.objInfo.loading = false;
-        if (res.length > 0) {
-          this.objInfo.latest = res[res.length - 1].id;
-          this.objInfo.list = this.objInfo.list.concat(res); //追加数据
-          this.objInfo.finished = false;
-        } else {
-          this.objInfo.finished = true;
-        }
       });
     },
     clickRightIcon() {
