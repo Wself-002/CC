@@ -27,10 +27,10 @@
       <Search :objInfo="objInfo"></Search>
       <van-tabs v-model="active" swipeable>
         <van-tab title="推广员数据">
-          <PromoterData :Height="objInfo.ishow_searchResult_num == 1 ?'57vh' :'50vh'"></PromoterData>
+          <PromoterData :Height="objInfo.ishow_searchResult_num == 1 ?'53vh' :'42vh'"></PromoterData>
         </van-tab>
-        <van-tab title="待支付列表">
-          <Paid :Height="objInfo.ishow_searchResult_num == 1 ?'57vh' :'50vh'"></Paid>
+        <van-tab title="待支付数据">
+          <Paid :Height="objInfo.ishow_searchResult_num == 1 ?'53vh' :'42vh'"></Paid>
         </van-tab>
       </van-tabs>
     </main>

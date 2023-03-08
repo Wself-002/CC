@@ -33,4 +33,14 @@ export default {
   userSaveNickname: (data: any) => {
     return request.qspost(`${BASEAPI}/api/cps/outer/admin/nickname/update`,data);
   },
+  // 待支付数据查询
+  payListSearch: (data: any) => {
+    return request.qspost(`${BASEAPI}/api/cps/outer/orders`,data);
+  },
+  // 查询
+  userSearch: (data: any) => {
+    return request.qspost(`${BASEAPI}/api/cps/outer/user/search`,data);
+  },
+
+
 };

@@ -9,11 +9,11 @@
     </div>
     <van-list :style="{height:Height}" v-model="objInfo.loading" :finished="objInfo.finished" finished-text="没有更多了" @load="onLoad">
       <div class="list list_content" v-for="item in objInfo.list" :key="item.id">
-        <div>{{ item.username }}</div>
+        <div>{{ item.id }}</div>
         <div>{{ item.nickname | ellipsis }}</div>
-        <div>{{ item.users }}</div>
-        <div>{{ item.clubs }}</div>
-        <div>{{ item.jifen }}</div>
+        <div>{{ item.regtime | formatDate }}</div>
+        <div>{{ item.paytime | formatDate }}</div>
+        <div>{{ item.state.value }}</div>
       </div>
     </van-list>
   </div>
@@ -42,7 +42,7 @@ export default {
     onLoad() {
       if (this.objInfo.finished) return;
       // 第一页固定传值latest，第N页传上一页最后一条数据的created
-      this.$api.listAdmin({'latest':this.objInfo.latest,'limit':10}).then((res) => {
+      this.$api.payListSearch({'latest':this.objInfo.latest,'limit':10}).then((res) => {
         // console.log('res: ', res);
         this.objInfo.loading = false;
         if (res.length > 0) {
@@ -53,7 +53,7 @@ export default {
           this.objInfo.finished = true;
         }
       });
-    },
+    }
   }
 }
 </script>

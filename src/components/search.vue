@@ -24,9 +24,9 @@
           <div class="list add_color no_border">
             <div>{{search_result.id}}</div>
             <div>{{search_result.nickname}}</div>
-            <div>{{search_result.time}}</div>
-            <div>{{search_result.status}}</div>
-            <div>{{search_result.membertime}}</div>
+            <div>{{search_result.regtime | formatDate}}</div>
+            <div>{{search_result.paytime == 0 ? '未开通' :'已开通'}}</div>
+            <div>{{search_result.paytime | formatDate}}</div>
           </div>
         </div>
         <div class="borderbox" v-if="objInfo.ishow_searchResult_num != 1 && objInfo.ishow_searchResult_num == 3">
@@ -61,6 +61,14 @@ export default {
       }
       if(this.loading)return
       this.loading = true
+      this.$api.userSearch({'text':this.search_value}).then((res) => {
+        console.log('res: ', res);
+        this.loading = false
+        this.objInfo.ishow_searchResult_num = 3
+        if(!res)return
+        this.search_result = res
+        this.objInfo.ishow_searchResult_num = 2
+      });
     },
     searchClear(){
       this.objInfo.ishow_searchResult_num = 1
@@ -109,13 +117,14 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 8vh;
+  padding: 10px 0;
   // border: 1px solid #ccc;
   // border-style: solid;
   // border-width: 1px;
   border-radius: 2vw;
   box-shadow: 2px 3px 8px #ccc;
   .add_color{
-    padding-right: 10px;
+    padding: 0 10px;
     color: #000;
     height: 4vh;
     >div{

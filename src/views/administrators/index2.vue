@@ -26,11 +26,9 @@
             </div>
           </div>
         </div>
-        <div class="searchbox">
-          <Search :objInfo="objInfo"></Search>
-        </div>
+        <Search :objInfo="objInfo"></Search>
       </van-tab>
-      <van-tab title="推广数据">
+      <van-tab title="推广员列表">
         <PromoterData :Height="'68vh'"></PromoterData>
       </van-tab>
       <van-tab title="待支付列表">
@@ -130,7 +128,4 @@ export default {
 // .page /deep/ .van-list__finished-text{
 //   color: #ffffff;
 // }
-.searchbox{
-  padding: 0 2.5vw;
-}
 </style>

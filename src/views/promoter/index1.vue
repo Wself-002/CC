@@ -43,10 +43,10 @@
       <Search :objInfo="objInfo"></Search>
       <van-tabs v-model="active" swipeable>
         <van-tab title="邀请数据">
-          <InviteData :Height="objInfo.ishow_searchResult_num == 1 ?'38vh' :'29vh'"></InviteData>
+          <InviteData :Height="objInfo.ishow_searchResult_num == 1 ?'38vh' :'28vh'"></InviteData>
         </van-tab>
-        <van-tab title="待支付列表">
-          <Paid :Height="objInfo.ishow_searchResult_num == 1 ?'38vh' :'29vh'"></Paid>
+        <van-tab title="待支付数据">
+          <Paid :Height="objInfo.ishow_searchResult_num == 1 ?'38vh' :'28vh'"></Paid>
         </van-tab>
       </van-tabs>
     </main>
@@ -54,13 +54,12 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import Time from '@/components/time.vue'
 import InviteData from '@/components/inviteData.vue'
 import Paid from '@/components/toBePaid.vue'
 import Search from '@/components/search.vue'
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
-  components:{Time,InviteData,Paid,Search},
+  components:{InviteData,Paid,Search},
   props: {
     objInfo: {
       type: Object,

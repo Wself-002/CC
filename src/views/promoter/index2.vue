@@ -44,7 +44,7 @@
         </div>
         <Search :objInfo="objInfo"></Search>
       </van-tab>
-      <van-tab title="邀请数据">
+      <van-tab title="拉新列表">
         <InviteData :Height="'66vh'"></InviteData>
       </van-tab>
       <van-tab title="待支付列表">
