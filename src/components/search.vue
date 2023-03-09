@@ -13,7 +13,8 @@
             <div :loading="loading" @click="onSearch" class="search_btn" :style="{background:getChannel.bg}">搜索</div>
           </template>
         </van-search>
-        <div class="borderbox" v-if="objInfo.ishow_searchResult_num != 1 && objInfo.ishow_searchResult_num == 2">
+        <div class="borderbox" v-if="loadingbox"><van-loading type="spinner" :color="getChannel.bg" /></div>
+        <div class="borderbox" v-if="objInfo.ishow_searchResult_num != 1 && objInfo.ishow_searchResult_num == 2 && !loadingbox">
           <div class="list add_color">
             <div>ID</div>
             <div>昵称</div>
@@ -29,7 +30,7 @@
             <div>{{search_result.paytime | formatDate}}</div>
           </div>
         </div>
-        <div class="borderbox" v-if="objInfo.ishow_searchResult_num != 1 && objInfo.ishow_searchResult_num == 3">
+        <div class="borderbox" v-if="objInfo.ishow_searchResult_num != 1 && objInfo.ishow_searchResult_num == 3 && !loadingbox">
           暂无此用户
         </div>
       </div>
@@ -48,7 +49,8 @@ export default {
     return{
       search_value:'',
       search_result:{},
-      loading:false
+      loading:false,
+      loadingbox:false
     }
   },
   methods:{
@@ -61,10 +63,12 @@ export default {
       }
       if(this.loading)return
       this.loading = true
+      this.loadingbox = true
       this.$api.userSearch({'text':this.search_value}).then((res) => {
         console.log('res: ', res);
         this.loading = false
         this.objInfo.ishow_searchResult_num = 3
+        this.loadingbox = false
         if(!res)return
         this.search_result = res
         this.objInfo.ishow_searchResult_num = 2
