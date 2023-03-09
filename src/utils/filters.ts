@@ -8,7 +8,7 @@ export default {
     return value;
   },
   formatDate(strDate: any, strFormat?: any) {
-    if (!strDate) return;
+    if (!strDate) return 0;
     // if (!strFormat) strFormat = "yyyy-MM-dd";
     if (!strFormat) strFormat = "yyyy-MM-dd HH:mm:ss";
     switch (typeof strDate) {

@@ -40,44 +40,40 @@
           <p>会员数/人</p>
         </div>
       </div>
-      <div class="row3">
-        <div class="title"><h3>邀请记录</h3></div>
-        <div class="list list_header" :style="{background:getChannel.bg}">
-          <div>id</div>
-          <div>昵称</div>
-          <div>注册时间</div>
-          <div>开通会员</div>
-          <div>总积分</div>
-        </div>
-        <van-list v-model="objInfo.loading" :finished="objInfo.finished" finished-text="没有更多了" @load="onLoad">
-          <div class="list list_content" v-for="item in objInfo.list" :key="item.id">
-            <div>{{ item.id }}</div>
-            <div>{{ item.nickname | ellipsis }}</div>
-            <div>{{ item.regtime }}</div>
-            <div>{{ item.jifen > 0 ? '是' :'否'}}</div>
-            <div>{{ item.jifen }}</div>
-          </div>
-        </van-list>
-      </div>
+      <Search :objInfo="objInfo"></Search>
+      <van-tabs v-model="active" swipeable>
+        <van-tab title="邀请数据">
+          <InviteData :Height="objInfo.ishow_searchResult_num == 1 ?'38vh' :'28vh'"></InviteData>
+        </van-tab>
+        <van-tab title="待支付数据">
+          <Paid :Height="objInfo.ishow_searchResult_num == 1 ?'38vh' :'28vh'"></Paid>
+        </van-tab>
+      </van-tabs>
     </main>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import InviteData from '@/components/inviteData.vue'
+import Paid from '@/components/toBePaid.vue'
+import Search from '@/components/search.vue'
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
+  components:{InviteData,Paid,Search},
   props: {
     objInfo: {
       type: Object,
       default: function () { return {} }
     }
   },
+  data(){
+    return{
+      active:0
+    }
+  },
   methods: {
     exitFun(){
       this.$emit('childMethods','exitFun')
-    },
-    onLoad() {
-      this.$emit('childMethods','onLoad')
     },
     clickRightIcon() {
       this.$emit('childMethods','clickRightIcon')
@@ -125,6 +121,7 @@ export default {
         font-weight: bold;
         padding: 1vw 2vw;
         font-size: 12px;
+        border-radius: 5px;
       }
       span {
         padding: 1vw 2vw;
@@ -140,6 +137,7 @@ export default {
 .row2 {
   width: 95vw;
   height: auto;
+  border-radius: 10px;
   color: #eeeeee;
   padding: 4vh 5vw;
   margin: 2.5vh auto;
@@ -159,43 +157,5 @@ export default {
 .row_1{
   background: url("../../assets/images/bg2.png") no-repeat center center;
   background-size: 100% 100%;
-}
-.row3 {
-  width: 100%;
-  padding: 0 2.5vw;
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 2vh;
-  }
-  .list {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 8vh;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 400;
-    > div {
-      width: 25%;
-    }
-  }
-  .list_header {
-    border-radius: 8px 8px 0px 0px;
-    color: #ffffff;
-  }
-  .list_content {
-    &:nth-child(odd) {
-      background: #ffffff;
-    }
-    &:nth-child(even) {
-      background: #f8f8f8;
-    }
-  }
-  .van-list {
-    height: calc(100vh - 50vh);
-    overflow-y: auto;
-  }
 }
 </style>

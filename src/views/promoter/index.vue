@@ -29,7 +29,7 @@
           <div class="btn btn2" @click="closePopup">取消</div>
         </div>
       </div>
-    </van-popup>  
+    </van-popup>
   </div>
 </template>
 
@@ -47,11 +47,8 @@ export default {
         nickname: "",
         invitecode: "",
         statObj: { all: 0, vip: 0, jifen: 0 },
-        latest: "latest",
-        list: [],
-        loading: false,
-        finished: false,
         isReadonly: true,
+        ishow_searchResult_num:1, // 1 没有搜索时不展示结果  2搜索完有数据  3 搜索完无数据
       },
       isShowPopup: false,
       isShowIndicators: true,
@@ -93,21 +90,6 @@ export default {
         this.objInfo.statObj.jifen = res.jifen;
       });
     },
-    onLoad() {
-      if (this.objInfo.finished) return;
-      // 第一页固定传值latest，第N页传上一页最后一条数据的created
-      this.$api.listStaff({'latest':this.objInfo.latest,'limit':10}).then((res) => {
-        this.objInfo.loading = false;
-        if (res.length > 0) {
-          this.objInfo.latest = res[res.length - 1].id;
-          this.objInfo.list = this.objInfo.list.concat(res); //追加数据
-          this.objInfo.finished = false;
-        } else {
-          this.objInfo.finished = true;
-        }
-      });
-    },
-
     openPopup() {
       this.isShowPopup = true;
       this.$toast.loading({ message: "海报生成中...", forbidClick: true });

@@ -24,48 +24,44 @@
           </div>
         </div>
       </div>
-      <div class="row3">
-        <div class="title"><h3>推广员</h3></div>
-        <div class="list list_header" :style="{background:getChannel.bg}">
-          <div>账号</div>
-          <div>昵称</div>
-          <div>邀请用户数</div>
-          <div>充值会员数</div>
-          <div>总积分</div>
-        </div>
-        <van-list v-model="objInfo.loading" :finished="objInfo.finished" finished-text="没有更多了" @load="onLoad">
-          <div class="list list_content" v-for="item in objInfo.list" :key="item.id">
-            <div>{{ item.username }}</div>
-            <div>{{ item.nickname | ellipsis }}</div>
-            <div>{{ item.users }}</div>
-            <div>{{ item.clubs }}</div>
-            <div>{{ item.jifen }}</div>
-          </div>
-        </van-list>
-      </div>
+      <Search :objInfo="objInfo"></Search>
+      <van-tabs v-model="active" swipeable>
+        <van-tab title="推广员数据">
+          <PromoterData :Height="objInfo.ishow_searchResult_num == 1 ?'53vh' :'42vh'"></PromoterData>
+        </van-tab>
+        <van-tab title="待支付数据">
+          <Paid :Height="objInfo.ishow_searchResult_num == 1 ?'53vh' :'42vh'"></Paid>
+        </van-tab>
+      </van-tabs>
     </main>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import PromoterData from '@/components/promoterData.vue'
+import Paid from '@/components/toBePaid.vue'
+import Search from '@/components/search.vue'
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
+  components:{PromoterData,Paid,Search},
   props: {
     objInfo: {
       type: Object,
       default: function () { return {} }
     }
   },
+  data(){
+    return{
+      active:0
+    }
+  },
   methods: {
     exitFun(){
       this.$emit('childMethods','exitFun')
     },
-    onLoad() {
-      this.$emit('childMethods','onLoad')
-    },
     clickRightIcon() {
       this.$emit('childMethods','clickRightIcon')
-    },
+    }
   },
 };
 </script>
@@ -107,43 +103,6 @@ export default {
         border: 1px solid #ffffff;
       }
     }
-  }
-}
-.row3 {
-  margin-top: 2vh;
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 2vh;
-  }
-  .list {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 8vh;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 400;
-    > div {
-      width: 25%;
-    }
-  }
-  .list_header {
-    border-radius: 8px 8px 0px 0px;
-    color: #ffffff;
-  }
-  .list_content {
-    &:nth-child(odd) {
-      background: #ffffff;
-    }
-    &:nth-child(even) {
-      background: #f8f8f8;
-    }
-  }
-  .van-list {
-    height: calc(100vh - 33vh);
-    overflow-y: auto;
   }
 }
 </style>

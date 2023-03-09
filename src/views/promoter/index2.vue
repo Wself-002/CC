@@ -42,48 +42,27 @@
             <p>会员数/人</p>
           </div>
         </div>
+        <Search :objInfo="objInfo"></Search>
       </van-tab>
-      <van-tab title="数据">
-        <div class="row3">
-          <div class="title"><h3>邀请记录</h3></div>
-          <div class="list list_header" :style="{background:getChannel.bg}">
-          <div>id</div>
-          <div>昵称</div>
-          <div>注册时间</div>
-          <div>开通会员</div>
-          <div>总积分</div>
-        </div>
-        <van-list v-model="objInfo.loading" :finished="objInfo.finished" finished-text="没有更多了" @load="onLoad">
-          <div class="list list_content" v-for="item in objInfo.list" :key="item.id">
-            <div>{{ item.id }}</div>
-            <div>{{ item.nickname | ellipsis }}</div>
-            <div>{{ item.regtime | formatDate }}</div>
-            <div>{{ item.jifen > 0 ? '是' :'否'}}</div>
-            <div>{{ item.jifen }}</div>
-          </div>
-        </van-list>
-        </div>
+      <van-tab title="拉新列表">
+        <InviteData :Height="'66vh'"></InviteData>
+      </van-tab>
+      <van-tab title="待支付列表">
+        <Paid :Height="'66vh'"></Paid>
       </van-tab>
     </van-tabs>
-    <div class="one_boxs" :style="{background:getChannel.bg}">
-      <div class="onebox">{{ timeObj.Y }}</div>
-      <span class="spot">-</span>
-      <div class="onebox">{{ timeObj.M }}</div>
-      <span class="spot">-</span>
-      <div class="onebox">{{ timeObj.D }}</div>
-      <span class="spot">&nbsp;&nbsp;</span>
-      <div class="onebox">{{ timeObj.h }}</div>
-      <span class="spot">:</span>
-      <div class="onebox">{{ timeObj.m }}</div>
-      <span class="spot">:</span>
-      <div class="onebox">{{ timeObj.s }}</div>
-    </div>
+    <Time></Time>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import Time from '@/components/time.vue'
+import InviteData from '@/components/inviteData.vue'
+import Paid from '@/components/toBePaid.vue'
+import Search from '@/components/search.vue'
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
+  components:{Time,InviteData,Paid,Search},
   props: {
     objInfo: {
       type: Object,
@@ -92,23 +71,12 @@ export default {
   },
   data() {
     return {
-      active:0,
-      timeObj: {},
-      timerObj:null,
+      active:0
     };
-  },
-  created() {
-    clearInterval(this.timerObj)
-    this.timerObj = setInterval(() => {
-      this.timeObj = this.$utils.countDown()
-    },1000)
   },
   methods: {
     exitFun(){
       this.$emit('childMethods','exitFun')
-    },
-    onLoad() {
-      this.$emit('childMethods','onLoad')
     },
     clickRightIcon() {
       this.$emit('childMethods','clickRightIcon')
@@ -125,7 +93,6 @@ export default {
   width: 100vw;
   height: 100vh;
   color: #333333;
-  // padding: 0 2.5vw;
   header {
     width: 100%;
     height: 5vh;
@@ -194,66 +161,6 @@ export default {
       color: #ffffff;
       margin-top: 1vh;
     }
-  }
-}
-.row3 {
-  width: 100%;
-  padding: 0 2.5vw;
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 2vh;
-  }
-  .list {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 8vh;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 400;
-    > div {
-      width: 25%;
-    }
-  }
-  .list_header {
-    border-radius: 8px 8px 0px 0px;
-    color: #ffffff;
-  }
-  .list_content {
-    &:nth-child(odd) {
-      background: #ffffff;
-    }
-    &:nth-child(even) {
-      background: #f8f8f8;
-    }
-  }
-  .van-list {
-    height: calc(100vh - 34vh);
-    overflow-y: auto;
-  }
-}
-.one_boxs{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  padding: 3vw 0;
-  .onebox{
-    min-width: 6vw;
-    height: 6vw;
-    text-align: center;
-    font-size: 20px;
-  }
-  .spot{
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 5px;
   }
 }
 .page /deep/ .van-list__finished-text{

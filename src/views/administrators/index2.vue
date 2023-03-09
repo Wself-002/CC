@@ -26,47 +26,27 @@
             </div>
           </div>
         </div>
+        <Search :objInfo="objInfo"></Search>
       </van-tab>
-      <van-tab title="数据">
-        <div class="row3">
-        <div class="list list_header" :style="{background:getChannel.bg}">
-          <div>账号</div>
-          <div>昵称</div>
-          <div>邀请用户数</div>
-          <div>充值会员数</div>
-          <div>总积分</div>
-        </div>
-        <van-list v-model="objInfo.loading" :finished="objInfo.finished" finished-text="没有更多了" @load="onLoad">
-          <div class="list list_content" v-for="item in objInfo.list" :key="item.id">
-            <div>{{ item.username }}</div>
-            <div>{{ item.nickname | ellipsis }}</div>
-            <div>{{ item.users }}</div>
-            <div>{{ item.clubs }}</div>
-            <div>{{ item.jifen }}</div>
-          </div>
-        </van-list>
-      </div>
+      <van-tab title="推广员列表">
+        <PromoterData :Height="'68vh'"></PromoterData>
+      </van-tab>
+      <van-tab title="待支付列表">
+        <Paid :Height="'68vh'"></Paid>
       </van-tab>
     </van-tabs>
-    <div class="one_boxs" :style="{background:getChannel.bg}">
-      <div class="onebox">{{ timeObj.Y }}</div>
-      <span class="spot">-</span>
-      <div class="onebox">{{ timeObj.M }}</div>
-      <span class="spot">-</span>
-      <div class="onebox">{{ timeObj.D }}</div>
-      <span class="spot">&nbsp;&nbsp;</span>
-      <div class="onebox">{{ timeObj.h }}</div>
-      <span class="spot">:</span>
-      <div class="onebox">{{ timeObj.m }}</div>
-      <span class="spot">:</span>
-      <div class="onebox">{{ timeObj.s }}</div>
-    </div>
+    <Time></Time>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import PromoterData from '@/components/promoterData.vue'
+import Paid from '@/components/toBePaid.vue'
+import Search from '@/components/search.vue'
+import Time from '@/components/time.vue'
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
+  components:{PromoterData,Paid,Search,Time},
   props: {
     objInfo: {
       type: Object,
@@ -75,16 +55,8 @@ export default {
   },
   data() {
     return {
-      active: 0,
-      timeObj: {},
-      timerObj:null,
+      active: 0
     };
-  },
-  created() {
-    clearInterval(this.timerObj)
-    this.timerObj = setInterval(() => {
-      this.timeObj = this.$utils.countDown()
-    },1000)
   },
   methods: {
     statAdmin(){
@@ -153,71 +125,7 @@ export default {
     }
   }
 }
-.row3 {
-  width: 100%;
-  padding: 0 2.5vw;
-  margin-top: 2vh;
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 2vh;
-    // h3{
-    //   color: #ffffff;
-    // }
-  }
-  .list {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 8vh;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 400;
-    > div {
-      width: 25%;
-    }
-  }
-  .list_header {
-    border-radius: 8px 8px 0px 0px;
-    color: #ffffff;
-  }
-  .list_content {
-    &:nth-child(odd) {
-      background: #ffffff;
-    }
-    &:nth-child(even) {
-      background: #f5f4f4;
-    }
-  }
-  .van-list {
-    height: calc(100vh - 32vh);
-    overflow-y: auto;
-  }
-}
-.one_boxs{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  padding: 3vw 0;
-  .onebox{
-    min-width: 6vw;
-    height: 6vw;
-    text-align: center;
-    font-size: 20px;
-  }
-  .spot{
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 5px;
-  }
-}
-.page /deep/ .van-list__finished-text{
-  color: #ffffff;
-}
+// .page /deep/ .van-list__finished-text{
+//   color: #ffffff;
+// }
 </style>

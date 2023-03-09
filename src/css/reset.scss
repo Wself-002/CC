@@ -123,6 +123,8 @@ a:hover {
 }
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
 }
 // 重置滚动条样式
 ::-webkit-scrollbar {
