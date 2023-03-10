@@ -30,12 +30,16 @@
       </van-action-sheet>
     </div>
     <CountDown v-if="active_menu == 1"></CountDown>
-    <InviteData
-      :Height="'90vh'"
-      v-if="active_menu == 2"
-      :isshow="false"
-    ></InviteData>
+    <transition name="van-slide-up">
+      <InviteData
+        :Height="'90vh'"
+        v-if="active_menu == 2"
+        :isshow="false"
+      ></InviteData>
+    </transition>
+    <transition name="van-slide-up">
     <Paid :Height="'90vh'" v-if="active_menu == 3" :isshow="false"></Paid>
+    </transition>
 
     <van-divider
       :style="{
@@ -121,7 +125,6 @@ export default {
 .page {
   width: 100vw;
   height: 100vh;
-  padding-top: 2vh;
 }
 .search_cell {
   width: 100vw;

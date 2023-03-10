@@ -90,7 +90,6 @@ export default {
 .page {
   width: 100vw;
   height: 100vh;
-  padding-top: 2vh;
 }
 .search_cell{
   width: 100vw;
