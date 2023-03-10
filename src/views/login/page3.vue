@@ -1,168 +1,148 @@
 <template>
   <div class="page">
-    <div
-      class="floatbtn"
-      :class="[{ movebtn: longclick }, `${btntype}btn`]"
-      @touchstart="touchstart($event)"
-      @touchmove="touchmove($event)"
-      @touchend="touchend($event)"
-    >
-      <!-- <span>悬浮按钮</span> -->
-    </div>
+    <main>
+      <div class="box">
+        <div class="logo_img">
+          <img src="../../assets/images/login_way5.svg" alt="">
+        </div>
+        <div class="inputBox">
+            <input type="text" required="" v-model.trim="objInfo.account">
+            <label>请输入用户名</label>
+        </div>
+        <div class="inputBox">
+            <input required="" @keydown.13="submit" v-model.trim="objInfo.password" :type="objInfo.see ? 'text' : 'password'">
+            <label>请输入密码</label>
+        </div>
+        <van-button :color="getChannel.dialog_btn" block round @click.prevent="submit" :loading="objInfo.submitLoading" loading-text="登录中..." :disabled="!objInfo.account || !objInfo.password">
+          登录
+        </van-button>
+      </div>
+      <div class="box_">
+        <h3>登录流程</h3>
+        <van-steps :active="stepActive" :active-color="getChannel.dialog_btn">
+          <van-step>输入账号</van-step>
+          <van-step>输入密码</van-step>
+          <van-step>完成</van-step>
+        </van-steps>
+      </div>
+    </main>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
-  data () {
-    return {
-      timeoutevent: 0,
-      longclick: 0,
-      // 手指原始位置
-      oldmousepos: {},
-      // 元素原始位置
-      oldnodepos: {},
-      btntype: 'right'
-    };
+  props: {
+    objInfo: {
+      type: Object,
+      default: function () { return {} }
+    },
+    stepActive:{
+      type: Number,
+      default: '-1'
+    },
+  },
+  computed:{
+    ...mapGetters([ "getChannel"]),
   },
   methods: {
-
-    touchstart (ev) {
-      ev.preventDefault()
-      // console.log('ev: ', ev);
-      // 定时器控制长按时间，超过500毫秒开始进行拖拽
-      this.timeoutevent = setTimeout(() => {
-        this.longclick = 1;
-      }, 100);
-      // const selectdom = ev.currenttarget;
-      const { pageX, pageY } = ev.touches[0]; // 手指位置
-      // console.log('pageX, pageY: ', pageX, pageY);
-      const selectdom = document.getElementsByClassName("floatbtn")[0]
-      const { offsetLeft, offsetTop } = selectdom; // 元素位置
-      // console.log('11111-offsetTop: ', offsetTop);
-      // console.log('222222222-offsetLeft: ', offsetLeft);
-      // 手指原始位置
-      this.oldmousepos = {
-        x: pageX,
-        y: pageY
-      };
-      // 元素原始位置
-      this.oldnodepos = {
-        x: offsetLeft,
-        y: offsetTop
-      };
-      selectdom.style.left = `${offsetLeft}px`;
-      selectdom.style.top = `${offsetTop}px`;
-        selectdom.style.backgroundColor = 'red'
+    submit() {
+      this.$emit('childMethods','submit')
     },
-    touchmove (ev) {
-      ev.preventDefault()
-      // console.log('ev: ', ev);
-      // 未达到500毫秒就移动则不触发长按，清空定时器
-
-      clearTimeout(this.timeoutevent);
-      if (this.longclick === 1) {
-        // const selectdom = ev.currenttarget;
-        // console.log('selectdom: ', selectdom);
-        const selectdom = document.getElementsByClassName("floatbtn")[0]
-        // x轴偏移量
-        const lefts = this.oldmousepos.x - this.oldnodepos.x;
-        // y轴偏移量
-        const tops = this.oldmousepos.y - this.oldnodepos.y;
-        const { pageX, pageY } = ev.touches[0]; // 手指位置
-        // console.log('ev.touches[0]: ', ev.touches[0]);
-        // console.log('pageX, pageY: ', pageX, pageY);
-        selectdom.style.left = `${pageX - lefts}px`;
-        selectdom.style.top = `${pageY - tops}px`;
-        selectdom.style.backgroundColor = 'red'
-      }
-    },
-    touchend (ev) {
-      ev.preventDefault()
-      // 清空定时器
-      clearTimeout(this.timeoutevent);
-      if (this.longclick === 1) {
-        this.longclick = 0;
-        // const selectdom = ev.currenttarget;
-        const selectdom = document.getElementsByClassName("floatbtn")[0]
-        const scrollWidth = document.body.scrollWidth;
-        const scrollHeight = document.body.scrollHeight;
-        const { offsetLeft, offsetTop } = selectdom;
-        console.log('offsetLeft, offsetTop: ', offsetLeft, offsetTop);
-        console.log('scrollWidth, scrollHeight: ', scrollWidth, scrollHeight);
-
-
-        selectdom.style.backgroundColor = '#fcebd0'
-        selectdom.style.top = offsetTop + 'px'
-        let isLeft = Math.sign((scrollWidth / 2) - offsetLeft) == -1 ? 'right' : 'left'
-        if (isLeft == 'left') {
-          selectdom.style.right = 'auto'
-          selectdom.style.left = 0
-        } else {
-          selectdom.style.left = 'auto'
-          selectdom.style.right = 0
-        }
-
-        if (offsetTop < 20) {
-          selectdom.style.bottom = 'auto';
-          selectdom.style.top = '20px';
-        } else if ((offsetTop + 38) > scrollHeight) {
-          selectdom.style.top = 'auto';
-          selectdom.style.bottom = '20px';
-        }
-        this.btntype = isLeft
-      }
+    clickRightIcon() {
+      this.$emit('childMethods','clickRightIcon')
     },
   }
 };
 </script>
+<style>
+.van-step--horizontal .van-step__circle-container{
+  background-color: transparent;
+}
+.box_ .van-steps[data-v-46663234]{
+
+  background-color: transparent;
+}
+</style>
 <style lang="scss" scoped>
+h3{
+  color: #fff;
+}
 .page {
   width: 100vw;
   height: 100vh;
-  // background: red;
+  padding: 10vh 8vw 0;
+  background-image: url('../../assets/images/bg.jpg');
+  background-size: cover;
+  // background: linear-gradient(220.55deg, #565656 0%, #181818 100%);
 }
-@mixin notselect {
-  -moz-user-select: none; /*火狐*/
-  -webkit-user-select: none; /*webkit浏览器*/
-  -ms-user-select: none; /*ie10*/
-  -khtml-user-select: none; /*早期浏览器*/
-  user-select: none;
+.box {
+  width: 100%;
+  padding: 5vw;
+  background: rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0,0.5);
+  border-radius: 5vw;
+  .inputBox {
+    position: relative;
+    input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+    }
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #ffff;
+      letter-spacing: 1px;
+      pointer-events: none;
+      transition: .5s;
+    }
+  }
 }
-@mixin not-touch {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.logo_img{
+  width: 80%;
+  margin: 0 auto 5vh;
+  img{
+    width: 100%;
+    object-fit: contain;
+  }
 }
-.floatbtn {
-  @include notselect;
-  @include not-touch();
+.box .inputBox input:focus~label,
+.box .inputBox input:valid~label {
+    top: -18px;
+    left: 0;
+    color: rgb(255, 215, 0);
+    font-size: 12px;
+}
+.box_{
   position: fixed;
-  z-index: 1;
-  overflow: hidden;
-  width: 100px;
-  left: calc(100vw - 100px);
-  top: calc(100vw - 100px);
-  color: #e0933a;
-  background: #fcebd0;
-  font-size: 14px;
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  // padding: 10px;
-  &.rightbtn {
-    border-radius: 20px 0 0 20px;
-  }
-  &.leftbtn {
-    border-radius: 0 20px 20px 0;
-  }
-  &.movebtn {
-    border-radius: 20px;
+  bottom: 2vh;
+  left: 0;
+  width: 100%;
+  font-weight: bold;
+  padding: 0 8vw;
+  .van-steps{
+    margin-top: 1vh;
   }
 }
+
+// .van-step__circle-container{
+//   background-color: transparent;
+// }
+// .van-step--horizontal .van-step__circle-container{
+//   background-color: transparent;
+// }
+// .van-steps[data-v-46663234]{
+//   background: transparent;
+// }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="row3">
+  <div class="row3" :class="{row_3padding:isshow}">
     <div class="list list_header" :style="{background:getChannel.bg}">
       <div>账号</div>
       <div>昵称</div>
@@ -26,7 +26,11 @@ export default {
     Height: {
       type: String,
       default: '50vh'
-    }
+    },
+    isshow: {
+      type: Boolean,
+      default: true
+    },
   },
   data(){
     return {
@@ -60,7 +64,6 @@ export default {
 <style lang="scss" scoped>
 .row3 {
   width: 100%;
-  padding: 2vh 2.5vw 0;
   .list_content {
     &:nth-child(odd) {
       background: #ffffff;
@@ -70,9 +73,11 @@ export default {
     }
   }
   .van-list {
-    // height: calc(100vh - 50vh);
     overflow-y: auto;
   }
+}
+.row_3padding{
+  padding: 2vh 2.5vw 0;
 }
 .list {
   display: flex;
