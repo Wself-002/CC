@@ -163,3 +163,11 @@ pre {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.radious_{
+  border-radius: 0 !important;
+}
+.headerimg{
+  width:20vw;
+  object-fit: contain;
+}

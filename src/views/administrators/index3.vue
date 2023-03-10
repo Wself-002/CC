@@ -10,6 +10,7 @@
         <Search :objInfo="objInfo"></Search>
       </van-action-sheet>
     </div>
+    <CountDown v-if="active_menu == 1"></CountDown>
     <PromoterData :Height="'90vh'" v-if="active_menu == 2" :isshow="false"></PromoterData>
     <Paid :Height="'90vh'" v-if="active_menu == 3" :isshow="false"></Paid>
     <van-divider
@@ -26,13 +27,15 @@ import PromoterData from '@/components/promoterData.vue'
 import Paid from '@/components/toBePaid.vue'
 import Search from '@/components/search.vue'
 import User from '@/components/administratorsUser.vue'
+import CountDown from '@/components/countDown.vue'
 
 import { mapGetters } from "vuex";
 export default {
   computed: { ...mapGetters([ "getChannel"]) },
-  components:{DragBtn1,DragBtn2,DragBtn3,PromoterData,Paid,Search,User},
+  components:{CountDown, DragBtn1,DragBtn2,DragBtn3,PromoterData,Paid,Search,User},
   data () {
     return {
+      actionSheetShow:false,
       // positonInfo:{
       //   drag1Top:0,
       //   drag1Bottom:false,
@@ -44,19 +47,19 @@ export default {
       dragInfo1:{
         id:1,
         word:'个人资料1',
-        top:'60vh',
+        top:'38vh',
         isshow:true
       },
       dragInfo2:{
         id:2,
         word:'邀请展示2',
-        top:'67vh',
+        top:'45vh',
         isshow:false
       },
       dragInfo3:{
         id:3,
         word:'支付展示3',
-        top:'74vh',
+        top:'52vh',
         isshow:false
       },
       active_menu:1

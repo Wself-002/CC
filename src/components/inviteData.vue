@@ -1,6 +1,6 @@
 <template>
   <div class="row3" :class="{row_3padding:isshow}">
-    <div class="list list_header" :style="{background:getChannel.bg}">
+    <div class="list list_header" :class="{radious_:!isshow}" :style="{background:getChannel.bg}">
     <div>id</div>
     <div>昵称</div>
     <div>注册时间</div>

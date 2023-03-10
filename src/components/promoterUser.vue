@@ -174,8 +174,4 @@ export default {
     }
   }
 }
-.headerimg{
-  width:20vw;
-  object-fit: contain;
-}
 </style>

@@ -21,6 +21,7 @@
           :type="objInfo.see ? 'text' : 'password'"
           placeholder="请输入密码"
           clearable
+          @keydown.13="submit"
           :right-icon="objInfo.see ? 'browsing-history' : 'browsing-history-o'"
           @click-right-icon="clickRightIcon" />
       </div>

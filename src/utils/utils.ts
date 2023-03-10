@@ -90,7 +90,7 @@ export default {
       }
     })
   },
-  // 获取时间
+  // 获取现在的时间
   countDown () {
     const Y = new Date().getFullYear()
     const M = new Date().getMonth() + 1
