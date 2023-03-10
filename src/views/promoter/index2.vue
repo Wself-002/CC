@@ -3,7 +3,7 @@
     <van-notice-bar :style="{background:getChannel.bg}" color="#fff" background="transparent" left-icon="info-o" scrollable :text="'尊敬的' + loginInfo.nickname + '您已登录'" />
     <van-tabs v-model="active" swipeable>
       <van-tab title="个人信息">
-        <User></User>
+        <User @childMethods="childMethods"></User>
         <Search :objInfo="objInfo"></Search>
       </van-tab>
       <van-tab title="拉新列表">
@@ -37,6 +37,11 @@ export default {
       active:0,
       loginInfo:{}
     };
+  },
+  methods:{
+    childMethods(data){
+      this.$emit('childMethods',data)
+    }
   },
   mounted(){
     this.loginInfo = JSON.parse(localStorage.getItem("ccLogin"))

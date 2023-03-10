@@ -7,7 +7,12 @@
     @touchstart="touchstart($event)"
     @touchmove="touchmove($event)"
     @touchend="touchend($event)"
-  >{{objInfo.word}}</div>
+  >
+  <van-badge dot v-if="objInfo.isshow">
+    {{objInfo.word}}
+  </van-badge>
+  <span v-else>{{objInfo.word}}</span>
+  </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -221,5 +226,11 @@ export default {
   &.movebtn {
     border-radius: 20px;box-shadow:none;
   }
+}
+</style>
+<style>
+.van-badge--fixed{
+  top: 7px;
+  right: -3px;
 }
 </style>

@@ -5,7 +5,7 @@
           shape="round"
           v-model="search_value"
           show-action
-          placeholder="搜索用户ID"
+          placeholder="请输入用户ID"
           @search="onSearch"
           @clear="searchClear"
         >

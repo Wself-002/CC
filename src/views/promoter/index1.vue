@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <main>
-      <User></User>
+      <User @childMethods="childMethods"></User>
       <Search :objInfo="objInfo"></Search>
       <van-tabs v-model="active" swipeable>
         <van-tab title="邀请数据">
@@ -32,6 +32,11 @@ export default {
   data(){
     return{
       active:0
+    }
+  },
+  methods:{
+    childMethods(data){
+      this.$emit('childMethods',data)
     }
   }
 };

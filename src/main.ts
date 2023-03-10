@@ -8,9 +8,11 @@ import utils from "./utils/utils";
 import "babel-polyfill";
 import Es6Promise from "es6-promise";
 Es6Promise.polyfill();
-import { Search, NoticeBar,Step, Steps, Tab, Tabs,Toast, Notify,Dialog, Loading, Button, Icon, Divider, TreeSelect, Field, List, Image as VanImage, Popup, Swipe, SwipeItem, PullRefresh } from "vant";
-
+import { Badge, ActionSheet, Cell,Search, NoticeBar,Step, Steps, Tab, Tabs,Toast, Notify,Dialog, Loading, Button, Icon, Divider, TreeSelect, Field, List, Image as VanImage, Popup, Swipe, SwipeItem, PullRefresh } from "vant";
+Vue.use(ActionSheet);
+Vue.use(Badge);
 Vue.use(Tab);
+Vue.use(Cell);
 Vue.use(Tabs);
 Vue.use(NoticeBar);
 Vue.use(Search);

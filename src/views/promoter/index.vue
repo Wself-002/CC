@@ -85,6 +85,15 @@ export default {
     closePopup() {
       this.isShowPopup = false;
     },
+    userInfo(bid) {
+      this.$api.userInfo({'bid':bid}).then((res) => {
+        this.swipeList = res.posters
+      });
+    },
+  },
+  created() {
+    let info = JSON.parse(localStorage.getItem("ccLogin"))
+    this.userInfo(info.id);
   },
 }
 </script>
