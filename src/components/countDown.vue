@@ -52,4 +52,19 @@ export default {
     }
   }
 }
+.van-circle{
+  animation: rotateAni 5s linear infinite;
+}
+// 透明度由
+@keyframes rotateAni {
+  0% {
+    transform: rotate(0);
+  }
+  50%{
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 </style>
