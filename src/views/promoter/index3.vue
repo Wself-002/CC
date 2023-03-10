@@ -75,19 +75,19 @@ export default {
       dragInfo1: {
         id: 1,
         word: '个人资料1',
-        top: '38vh',
+        top: '40vh',
         isshow: true
       },
       dragInfo2: {
         id: 2,
         word: '邀请展示2',
-        top: '45vh',
+        top: '47vh',
         isshow: false
       },
       dragInfo3: {
         id: 3,
         word: '支付展示3',
-        top: '52vh',
+        top: '54vh',
         isshow: false
       },
       active_menu: 1
@@ -121,6 +121,7 @@ export default {
 .page {
   width: 100vw;
   height: 100vh;
+  padding-top: 2vh;
 }
 .search_cell {
   width: 100vw;

@@ -5,6 +5,7 @@
       <van-circle stroke-width="80" stroke-linecap="square" v-model="currentRate" :speed="100" :rate="currentRate" layer-color='#ccc' size="120px" :color="getChannel.dialog_btn"/>
       <van-count-down :time="time" :style="{color:getChannel.dialog_btn}" />
     </div>
+    <h3>健康生活每一天</h3>
   </div>
 </template>
 <script>
@@ -39,9 +40,9 @@ export default {
   position: relative;
   .circle_box{
     position: relative;
-    padding: 10px;
+    // padding: 10px;
     border-radius: 10px;
-    margin-top: 2vh;
+    margin: 2vh 0;
     .van-count-down{
       position: absolute;
       top: 50%;
