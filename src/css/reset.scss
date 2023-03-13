@@ -171,3 +171,8 @@ pre {
   width:20vw;
   object-fit: contain;
 }
+
+// // input 修改自动填充背景
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}

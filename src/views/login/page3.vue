@@ -70,7 +70,7 @@ h3{
 .page {
   width: 100vw;
   height: 100vh;
-  padding: 10vh 8vw 0;
+  padding: 15vh 8vw 0;
   background-image: url('../../assets/images/bg.jpg');
   background-size: cover;
   // background: linear-gradient(220.55deg, #565656 0%, #181818 100%);
